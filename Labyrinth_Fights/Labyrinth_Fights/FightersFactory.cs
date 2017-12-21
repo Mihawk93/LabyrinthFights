@@ -8,10 +8,11 @@ namespace Labyrinth_Fights
 {
     class FightersFactory
     {
-        public Fighter createFighter(int X, int Y)
+        public Fighter createFighter(int X, int Y) // Crée les combatants
         {
             Fighter fighter = new Fighter(X,Y);
             return fighter;
+
         }
     }
 }
