@@ -10,6 +10,7 @@ namespace Labyrinth_Fights
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("hey");
         }
     }
 }
