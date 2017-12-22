@@ -90,6 +90,11 @@ namespace Labyrinth_Fights
 
         }
 
+        public void test2()
+        {
+            Console.WriteLine("HelloWorld");
+        }
+
         public char[,] ConvertListStringToMatChar(List<string> liststr)
         {
             int width = liststr[0].Length;
