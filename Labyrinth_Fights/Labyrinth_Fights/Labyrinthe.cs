@@ -149,6 +149,7 @@ namespace Labyrinth_Fights
                 Console.WriteLine(str);
             }
         }
+
         public void Displaychar(char[,] mat)
         {
             for(int i=0;i<mat.GetLength(0);i++)
@@ -160,6 +161,7 @@ namespace Labyrinth_Fights
                 Console.WriteLine();
             }
         }
+
         public void Display(Cell[,] matcell)
         {
             for (int i=0; i<matcell.GetLength(0); i++)
@@ -189,6 +191,11 @@ namespace Labyrinth_Fights
 
                 Console.WriteLine();
             }
+        }
+
+        public void test2()
+        {
+            Console.WriteLine("hey");
         }
 
 
