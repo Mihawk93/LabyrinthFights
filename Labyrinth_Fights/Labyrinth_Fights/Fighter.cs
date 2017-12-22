@@ -8,32 +8,61 @@ namespace Labyrinth_Fights
 {
     class Fighter
     {
-        protected int id;
+        int id;
         int dégats;
         int hp;
-        int coord_X;
-        int coord_Y;
+        Position pos;
         List<Weapon> weapons;
         bool offensif;
 
-        public Fighter (int X , int Y)
+
+        public Fighter (Position pos)
         {
-            this.coord_X = X;
-            this.coord_Y = Y;
-            dégats = 10;
-            hp = 100;
-            weapons = new List<Weapon>();
-            bool offensif = false;
+            this.pos = pos;
+            this.dégats = 10;
+            this.hp = 100;
+            this.weapons = new List<Weapon>();
+            this.offensif = false;
         }
 
-        public int GetId()
+
+        public int Id
         {
-            return this.id;
+            get { return id; }
+            set { id = value; }
+
         }
 
-        public void SetId(int ID)
+        public int Dégats
         {
-            this.id = ID;
+            get { return dégats; }
+            set { dégats = value; }
+
         }
+
+        public int Hp
+        {
+            get { return hp; }
+            set { hp = value; }
+
+        }
+
+        public Position Pos
+        {
+            get { return pos; }
+            set { pos = value; }
+
+        }
+
+        public bool Offensif
+        {
+            get { return offensif; }
+            set { offensif = value; }
+
+        }
+
+
+
+
     }
 }

@@ -42,12 +42,6 @@ namespace Labyrinth_Fights
         */
 
 
-        public void testtest()
-        {
-            int r = 3;
-            r = 4;
-
-        }
         public List<string> ReadFile(string file)
         {
             StreamReader read = null;

@@ -8,9 +8,9 @@ namespace Labyrinth_Fights
 {
     class FightersFactory
     {
-        public Fighter createFighter(int X, int Y) // Crée les combatants 2.0
+        public Fighter createFighter(Position pos) // Crée les combatants 2.0
         {
-            Fighter fighter = new Fighter(X,Y);
+            Fighter fighter = new Fighter(pos);
             return fighter;
 
         }
