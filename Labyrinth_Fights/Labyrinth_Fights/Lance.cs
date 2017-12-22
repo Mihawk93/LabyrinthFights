@@ -8,7 +8,7 @@ namespace Labyrinth_Fights
 {
     class Lance : Weapon
     {
-        public Lance(int X, int Y) : base(X, Y)
+        public Lance(Position position) : base(position)
         {
             this.dégats = 7;
         }

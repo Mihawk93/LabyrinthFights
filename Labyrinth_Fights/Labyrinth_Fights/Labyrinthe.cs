@@ -12,8 +12,7 @@ namespace Labyrinth_Fights
     {
         //attributs
 
-
-        static List<Position> nombreDePositionLibre;
+            
         static int[,] map;
 
 
@@ -22,25 +21,23 @@ namespace Labyrinth_Fights
             
         }
 
-
-        /*
-        public void SetNombreDePositionLibre()
+        
+        public List<Position> SetNombreDePositionLibre(Cell[,] cells)
         {
-            for(int i=0; i<map.GetLength(0);i++)
+            List<Position> positionsLibres= new List<Position>();
+            for(int i=0; i<cells.GetLength(0);i++)
             {
-                for(int j=0;j<map.GetLength(1);j++)
+                for(int j=0;j<cells.GetLength(1);j++)
                 {
-                    if (map[i, j] == 0)
+                    if (cells[i,j].isEmpty)
                     {
                         Position position = new Position(i, j);
-                        nombreDePositionLibre.Add(position);
+                        positionsLibres.Add(position);
                     }
-                        
                 }
-            }    
+            }
+            return positionsLibres;
         }
-        */
-
 
         public List<string> ReadFile(string file)
         {

@@ -11,6 +11,7 @@ namespace Labyrinth_Fights
         int id;
         int dégats;
         int hp;
+
         Position pos;
         List<Weapon> weapons;
         bool offensif;
@@ -44,8 +45,8 @@ namespace Labyrinth_Fights
         {
             get { return hp; }
             set { hp = value; }
-
         }
+
 
         public Position Pos
         {

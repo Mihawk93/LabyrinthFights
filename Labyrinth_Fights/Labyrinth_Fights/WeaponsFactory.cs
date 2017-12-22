@@ -8,18 +8,18 @@ namespace Labyrinth_Fights
 {
     public class WeaponsFactory
     {
-        public Weapon CreateWeapon(String type,int X, int Y)
+        public Weapon CreateWeapon(String type, Position position)
         {
             Weapon weapon = null;
 
             if (type == "Epee")
-                weapon = new Epee(X,Y);
+                weapon = new Epee(position);
             if (type == "Hache")
-                weapon = new Hache(X,Y);
+                weapon = new Hache(position);
             if (type == "Lance")
-                weapon = new Lance(X,Y);
+                weapon = new Lance(position);
             if (type == "Dague")
-                weapon = new Dague(X,Y);
+                weapon = new Dague(position);
             return weapon;
         }
     }

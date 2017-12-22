@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace Labyrinth_Fights
 {
-    class Position
+    public class Position
     {
         public int coord_X;
         public int coord_Y;
 
         public Position(int X, int Y)
         {
-            coord_X = X;
-            coord_Y = Y; 
+            this.coord_X = X;
+            this.coord_Y = Y; 
+        }
+
+        public override string ToString()
+        {
+            return "{"+this.coord_X+","+this.coord_Y+"}";
         }
     }
 }
