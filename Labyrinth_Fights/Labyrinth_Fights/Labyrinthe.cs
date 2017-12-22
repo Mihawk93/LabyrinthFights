@@ -42,6 +42,12 @@ namespace Labyrinth_Fights
         */
 
 
+        public void testtest()
+        {
+            int r = 3;
+            r = 4;
+
+        }
         public List<string> ReadFile(string file)
         {
             StreamReader read = null;
@@ -88,11 +94,6 @@ namespace Labyrinth_Fights
 
             return champs2;
 
-        }
-
-        public void test2()
-        {
-            Console.WriteLine("HelloWorld");
         }
 
         public char[,] ConvertListStringToMatChar(List<string> liststr)
@@ -198,10 +199,6 @@ namespace Labyrinth_Fights
             }
         }
 
-        public void test2()
-        {
-            Console.WriteLine("hey");
-        }
 
 
     }
