@@ -9,7 +9,7 @@ namespace Labyrinth_Fights
     class Epee : Weapon
     {
 
-        public Epee(int X, int Y) : base(X, Y)
+        public Epee(Position position) : base()
         {
             this.dégats = 5;
         }

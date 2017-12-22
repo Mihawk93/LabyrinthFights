@@ -8,7 +8,7 @@ namespace Labyrinth_Fights
 {
     class Hache : Weapon
     {
-        public Hache(int X, int Y) : base(X, Y)
+        public Hache(Position position) : base()
         {
             this.dégats = 10;
         }

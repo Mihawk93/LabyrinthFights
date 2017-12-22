@@ -11,15 +11,13 @@ namespace Labyrinth_Fights
         protected int id;
         int dégats;
         int hp;
-        int coord_X;
-        int coord_Y;
+        Position position;
         List<Weapon> weapons;
         bool offensif;
 
-        public Fighter (int X , int Y)
+        public Fighter (Position position)
         {
-            this.coord_X = X;
-            this.coord_Y = Y;
+            this.position = position;
             dégats = 10;
             hp = 100;
             weapons = new List<Weapon>();

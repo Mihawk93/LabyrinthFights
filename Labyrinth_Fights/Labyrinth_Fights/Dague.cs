@@ -8,7 +8,7 @@ namespace Labyrinth_Fights
 {
     class Dague : Weapon
     {
-        public Dague(int X, int Y) : base(X, Y)
+        public Dague(Position position) : base()
         {
             this.dégats = 3;
         }
