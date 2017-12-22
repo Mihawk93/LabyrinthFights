@@ -8,8 +8,8 @@ namespace Labyrinth_Fights
 {
     class Position
     {
-        int coord_X;
-        int coord_Y;
+        public int coord_X;
+        public int coord_Y;
 
         public Position(int X, int Y)
         {

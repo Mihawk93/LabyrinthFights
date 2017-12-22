@@ -22,7 +22,7 @@ namespace Labyrinth_Fights
             Fighter fighter = null ;
             if (fightersList == null)
             {
-                fighter = factory.createFighter();
+                //fighter = factory.createFighter();
                 fighter.SetId(0);
             }
             else

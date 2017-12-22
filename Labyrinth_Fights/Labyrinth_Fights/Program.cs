@@ -10,7 +10,22 @@ namespace Labyrinth_Fights
     {
         static void Main(string[] args)
         {
-           
+            
+            string file = "mazeGenerator.txt";
+            Labyrinthe maze = new Labyrinthe();
+            List<string> liststring = maze.ReadFile(file);
+            char[,] matchar = maze.ConvertListStringToMatChar(liststring);
+            Cell[,] cells = maze.CharToCell(matchar);
+            //maze.DisplayList(liststring);
+            //maze.Displaychar(matchar);
+            maze.Display(cells);
+            
+
+            
+
+            Console.ReadKey();
         }
+
+
     }
 }

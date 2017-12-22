@@ -7,18 +7,23 @@ using System.IO;
 
 namespace Labyrinth_Fights
 {
- 
+
     class Labyrinthe
     {
         //attributs
-        public int width;
-        public int length;
-        string[] champs;
-        char[,] MatriceFile;
-        
-        List<Position> nombreDePositionLibre;
-        int[,] map;
 
+
+        static List<Position> nombreDePositionLibre;
+        static int[,] map;
+
+
+        public Labyrinthe()
+        {
+            
+        }
+
+
+        /*
         public void SetNombreDePositionLibre()
         {
             for(int i=0; i<map.GetLength(0);i++)
@@ -34,135 +39,158 @@ namespace Labyrinth_Fights
                 }
             }    
         }
-        
-        
-        
-        public void ReadAndStore(string fileName)
+        */
+
+
+        public List<string> ReadFile(string file)
         {
-            StreamReader input = null;
+            StreamReader read = null;
             string line;
-            width = 0;
-            length = 0;
+            string[] champs;
+            List<string> champs2 = new List<string>();
+
             try
             {
-                input = new StreamReader(fileName); //try to open the txt if it exists or try to read if we have the right to
-                //throws exception otherwise
 
-                while ((line = input.ReadLine()) != null)
+                read = new StreamReader(file); //try to open the txt if it exists or try to read if we have the right to
+                //throws exception otherwise
+                
+
+                while (read.Peek() > 0)
                 {
                     //line store the actual line
+                    line = read.ReadLine();
+                    champs = line.Split(';');
 
-                    foreach (char letters in line)
+                    for (int i = 0; i < champs.Length; i++)
                     {
+                        champs2.Add(champs[i]);
+                    }
 
+                }
+
+
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("exception : " + e.Message);
+            }
+
+            finally
+            {
+                if (read != null)
+                {
+                    read.Close();
+
+                }
+            }
+
+            return champs2;
+
+        }
+
+        public char[,] ConvertListStringToMatChar(List<string> liststr)
+        {
+            int width = liststr[0].Length;
+            int length = liststr.Count;
+            char[,] matriceDeChar = new char[length, width];
+
+            for (int i = 0; i < matriceDeChar.GetLength(0); i++)
+            {
+                for (int j = 0; j < matriceDeChar.GetLength(1); j++)
+                {
+                    matriceDeChar[i, j] = liststr[i][j];
+                }
+            }
+
+            return matriceDeChar;
+
+
+        }
+
+        public Cell[,] CharToCell(char[,] matriceDeChar)
+        {
+            int width = matriceDeChar.GetLength(1);
+            int length = matriceDeChar.GetLength(0);
+            Cell[,] matcell = new Cell[length, width];
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    Position pos = new Position(i, j);
+                    switch(matriceDeChar[i,j])
+                    {
+                        case ('1'):
+                            matcell[i, j] = new Cell(pos, false, true, false);
+                            break;
+                        case ('2'):
+                            matcell[i, j] = new Cell(pos, false, false, true);
+                            break;
+                        case ('0'):
+                            matcell[i, j] = new Cell(pos, true, false, false);
+                            break;
+                        default:
+                            matcell[i, j] = new Cell(pos, false, false, false);
+                            break;
 
                     }
-                    champs = line.Split(';');
-                    width = champs[0].Length;
+                    
+                }
+            }
 
+            return matcell;
+        }
 
+        public void DisplayList (List<string> liste)
+        {
+            foreach (string str in liste)
+            {
+                Console.WriteLine(str);
+            }
+        }
+        public void Displaychar(char[,] mat)
+        {
+            for(int i=0;i<mat.GetLength(0);i++)
+            {
+                for(int j=0; j<mat.GetLength(1);j++)
+                {
+                    Console.Write(mat[i, j]);
                 }
                 Console.WriteLine();
-                length++;
-
             }
-
-            catch (Exception e)
-            {
-                Console.WriteLine("exception : " + e.Message);
-            }
-
-            finally
-            {
-                if (input != null)
-                {
-                    input.Close();
-                }
-            }
-
-
         }
-
-
-        
-
-
-
-
-        public void ReadFile(string fileName)
+        public void Display(Cell[,] matcell)
         {
-            StreamReader input = null;
-            string line;
-            width = 0;
-            length = 0;
-            try
+            for (int i=0; i<matcell.GetLength(0); i++)
             {
-                input = new StreamReader(fileName); //try to open the txt if it exists or try to read if we have the right to
-                //throws exception otherwise
-
-                while ((line = input.ReadLine()) != null)
+                for(int j=0; j<matcell.GetLength(1); j++)
                 {
-                    //line store the actual ligne
-             
-                    foreach (char letters in line) {
-
-                        
-                        
-                                switch (letters)
-                            {
-                                case '1':
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                    Console.Write("■");
-                                    Console.ResetColor();
-                                    break;
-                                case '2':
-                                    Console.ForegroundColor = ConsoleColor.Cyan;
-                                    Console.Write("■");
-                                    Console.ResetColor();
-                                    break;
-                                case '0':
-                                    Console.Write(" ");
-                                    break;
-                                default:
-                                    Console.Write("what");
-                                    break;        
-                            }
-                            champs = line.Split(';');
-                            width = champs[0].Length;
-
-                            
-
-
-                          
-
+                    if (matcell[i,j].isWall)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("■");
+                        Console.ResetColor();
                     }
-                    Console.WriteLine();
-                    length++;
-                    
-                    
 
+                    if (matcell[i,j].isExit)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write("■");
+                        Console.ResetColor();
+                    }
+
+                    if(matcell[i,j].isEmpty)
+                    {
+                        Console.Write(" ");
+                    }
 
                 }
 
+                Console.WriteLine();
             }
-
-            catch (Exception e)
-            {
-                Console.WriteLine("exception : " + e.Message);
-            }
-
-            finally
-            {
-                if (input != null)
-                {
-                    input.Close();
-                }
-            }
-
         }
-        
-        
-        
-        
+
+
     }
 }

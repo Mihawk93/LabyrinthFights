@@ -27,10 +27,10 @@ namespace Labyrinth_Fights
 
         public Weapon AskForWeapon()
         {
-            Weapon weapon;
+            Weapon weapon = null;
             Random rand = new Random();
             string type = weaponsDictionary[rand.Next(4)];
-            weapon = factory.CreateWeapon(type);
+            //weapon = factory.CreateWeapon(type);
             return weapon;
         }
     }
