@@ -11,7 +11,7 @@ namespace Labyrinth_Fights
         static void Main(string[] args)
         {
             
-            string file = "mazeGenerator.txt";
+            string file = "..\\..\\mazeGenerator.txt";
             Labyrinthe maze = new Labyrinthe();
             List<string> liststring = maze.ReadFile(file);
             char[,] matchar = maze.ConvertListStringToMatChar(liststring);
