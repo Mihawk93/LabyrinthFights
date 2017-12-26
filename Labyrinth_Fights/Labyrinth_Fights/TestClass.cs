@@ -123,6 +123,7 @@ namespace Labyrinth_Fights
             {
                 Console.WriteLine();
                 maze.Deplacement(matchar, fighter);
+                Console.Clear();
                 maze.Displaychar(matchar);
                 Console.ReadKey();
             }

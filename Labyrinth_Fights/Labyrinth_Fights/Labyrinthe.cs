@@ -320,44 +320,41 @@ namespace Labyrinth_Fights
             foreach( Position pose in fighter.Visitees)
             {
                 
-                if(pose==fighter.Nord())
+                if(pose.coord_X==fighter.Nord().coord_X && pose.coord_Y==fighter.Nord().coord_Y)
                 {
                     fighter.nordVisite = true;
                 }
-                else
+                
+                if(pose.coord_X == fighter.Sud().coord_X && pose.coord_Y == fighter.Sud().coord_Y)
                 {
-                    fighter.nordVisite = false;
-                    if (pose == fighter.Sud())
-                    {
-                        fighter.sudVisite = true;
-                    }
-                    else
-                    {
-                        fighter.sudVisite = false;
-                        if (pose == fighter.Ouest())
-                        {
-                            fighter.ouestVisite = true;
-                        }
-                        else
-                        {
-                            fighter.ouestVisite = false;
-                            if (pose == fighter.Est())
-                            {
-                                fighter.estVisite = true;
-                            }
-                            else
-                            {
-                                fighter.ouestVisite = false;
-                            }
-                        }
-                        
-                    }
-                    
+                    fighter.sudVisite = true;
                 }
-               
+                
+                if (pose.coord_X == fighter.Ouest().coord_X && pose.coord_Y == fighter.Ouest().coord_Y)
+                {
+                    fighter.ouestVisite = true;
+                }
+
+                if (pose.coord_X == fighter.Est().coord_X && pose.coord_Y == fighter.Est().coord_Y)
+                {
+                    fighter.estVisite = true;
+                }
                 Console.Write(pose);
             }
-            if(mat[fighter.Nord().coord_X,fighter.Nord().coord_Y] == '0' && fighter.nordVisite == false)
+            
+            Console.Write(" et la pose du: ");
+            Console.WriteLine();
+            Console.WriteLine("nord: " + fighter.Nord());
+            Console.WriteLine("sud: " + fighter.Sud());
+            Console.WriteLine("ouest: " + fighter.Ouest());
+            Console.WriteLine("est: " + fighter.Est());
+            Console.WriteLine();
+            Console.WriteLine("nord: " + fighter.nordVisite);
+            Console.WriteLine("sud: " + fighter.sudVisite);
+            Console.WriteLine("ouest: " + fighter.ouestVisite);
+            Console.WriteLine("est: " + fighter.estVisite);
+
+            if (mat[fighter.Nord().coord_X,fighter.Nord().coord_Y] == '0' && fighter.nordVisite == false)
             {
                 voisinsLibres.Add(fighter.Nord());
             }
@@ -384,6 +381,10 @@ namespace Labyrinth_Fights
                 Console.Write(pose);
             }
             Console.WriteLine("random: " + index);
+            fighter.estVisite = false;
+            fighter.nordVisite = false;
+            fighter.sudVisite = false;
+            fighter.ouestVisite = false;
             mat[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
             fighter.pos = voisinsLibres[index];
             mat[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
