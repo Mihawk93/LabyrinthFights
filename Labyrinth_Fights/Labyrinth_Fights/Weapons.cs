@@ -9,14 +9,15 @@ namespace Labyrinth_Fights
     public class Weapons
     {
         WeaponsFactory factory;
-        Dictionary<int, string> weaponsDictionary = new Dictionary<int, string>();
+        Dictionary<int, string> catalogueArmes = new Dictionary<int, string>();
+        List<Weapon> ListWeapons = new List<Weapon>();
 
         public void InitDictionary()
         {
-            weaponsDictionary.Add(0, "Epee");
-            weaponsDictionary.Add(1, "Hache");
-            weaponsDictionary.Add(2, "Lance");
-            weaponsDictionary.Add(3, "Dague");
+            catalogueArmes.Add(0, "Epee");
+            catalogueArmes.Add(1, "Hache");
+            catalogueArmes.Add(2, "Lance");
+            catalogueArmes.Add(3, "Dague");
         }
 
         public Weapons(WeaponsFactory Factory)
@@ -25,12 +26,13 @@ namespace Labyrinth_Fights
             this.factory = Factory;
         }
 
-        public Weapon AskForWeapon()
+        public Weapon AskForWeapon(Position position)
         {
             Weapon weapon = null;
             Random rand = new Random();
-            string type = weaponsDictionary[rand.Next(4)];
-            //weapon = factory.CreateWeapon(type);
+            string type = catalogueArmes[rand.Next(4)];
+            weapon = factory.CreateWeapon(type,position);
+            ListWeapons.Add(weapon);
             return weapon;
         }
     }

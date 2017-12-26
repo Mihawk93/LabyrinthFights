@@ -9,11 +9,11 @@ namespace Labyrinth_Fights
     public class Weapon
     {
         protected int dégats;
-        Position position;
+        public Position pos;
 
         public Weapon(Position theposition)
         {
-            this.position = theposition;
+            this.pos = theposition;
         }
     }
 }

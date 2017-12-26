@@ -22,7 +22,7 @@ namespace Labyrinth_Fights
         }
 
         
-        public List<Position> SetNombreDePositionLibre(Cell[,] cells)
+        public List<Position> PositionLibres(Cell[,] cells)
         {
             List<Position> positionsLibres= new List<Position>();
             for(int i=0; i<cells.GetLength(0);i++)
@@ -38,6 +38,12 @@ namespace Labyrinth_Fights
             }
             return positionsLibres;
         }
+        /*
+        public Position UnePositionLibre(List<Position> positionsLibres, int rnd)
+        {
+            Position positionLibre;
+            return positionLibre = positionsLibres[rnd];
+        }*/
 
         public List<string> ReadFile(string file)
         {
@@ -153,7 +159,45 @@ namespace Labyrinth_Fights
             {
                 for(int j=0; j<mat.GetLength(1);j++)
                 {
-                    Console.Write(mat[i, j]);
+                    if (mat[i, j] == '1')
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("■");
+                        Console.ResetColor();
+                    }
+
+                    if (mat[i, j] == '2')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write("■");
+                        Console.ResetColor();
+                    }
+
+                    if (mat[i, j] == '0')
+                    {
+                        Console.Write(" ");
+                    }
+                    if (mat[i, j] == 'E')
+                    {
+                        Console.Write("E");
+                    }
+
+                    if (mat[i, j] == 'X')
+                    {
+                        Console.Write("X");
+                    }
+                    if (mat[i, j] == 'H')
+                    {
+                        Console.Write("H");
+                    }
+                    if (mat[i, j] == 'D')
+                    {
+                        Console.Write("D");
+                    }
+                    if (mat[i, j] == 'L')
+                    {
+                        Console.Write("L");
+                    }
                 }
                 Console.WriteLine();
             }

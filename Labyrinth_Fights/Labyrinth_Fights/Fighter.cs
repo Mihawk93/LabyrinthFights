@@ -12,7 +12,7 @@ namespace Labyrinth_Fights
         int dégats;
         int hp;
 
-        Position pos;
+        public Position pos;
         List<Weapon> weapons;
         bool offensif;
 

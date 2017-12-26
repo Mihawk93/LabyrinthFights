@@ -19,7 +19,7 @@ namespace Labyrinth_Fights
             this.isEmpty = isEmpty;
             this.isWall = isWall;
             this.isExit = isExit;
-        }
+        }   
 
 
     }

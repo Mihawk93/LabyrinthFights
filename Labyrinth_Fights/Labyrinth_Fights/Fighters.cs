@@ -13,22 +13,22 @@ namespace Labyrinth_Fights
 
         public Fighters(FightersFactory Factory)
         {
-            fightersList = null;
+            fightersList = new List<Fighter>();
             this.factory = Factory;
         }
 
-        public Fighter AskForAFighter()
+        public Fighter AskForAFighter(Position position)
         {
-            Fighter fighter = null ;
+            Fighter fighter = factory.CreateFighter(position);
             if (fightersList == null)
             {
-                //fighter = factory.createFighter();
                 fighter.Id = 0;
             }
             else
             {
-                //Trouver l'id du fihgter en dernière position dans la list puis attribuer l'id du nouveau fighter (=celui de l'ancien +1)
+                fighter.Id = fightersList.Count;
             }
+            fightersList.Add(fighter);
             return fighter;
         }
     }

@@ -27,7 +27,7 @@ namespace Labyrinth_Fights
             List<string> liststring = maze.ReadFile(file);
             char[,] matchar = maze.ConvertListStringToMatChar(liststring);
             Cell[,] cells = maze.CharToCell(matchar);
-            List<Position> positionsLibres = maze.SetNombreDePositionLibre(cells); 
+            List<Position> positionsLibres = maze.PositionLibres(cells); 
             foreach(Position position in positionsLibres)
             {
                 Console.WriteLine(position);
