@@ -8,13 +8,18 @@ namespace Labyrinth_Fights
 {
     class TestClass
     {
+        public char[,] TestInitialisation(Labyrinthe maze, string file)
+        {
+            List<string> liststring = maze.ReadFile(file);
+            char[,] matchar = maze.ConvertListStringToMatChar(liststring);
+            return matchar;
+        }
 
         public void TestDisplays()
         {
             string file = "..\\..\\mazeGenerator.txt";
             Labyrinthe maze = new Labyrinthe();
-            List<string> liststring = maze.ReadFile(file);
-            char[,] matchar = maze.ConvertListStringToMatChar(liststring);
+            char[,] matchar = TestInitialisation(maze, file);
             Cell[,] cells = maze.CharToCell(matchar);
             //maze.DisplayList(liststring);
             //maze.Displaychar(matchar);
@@ -24,8 +29,7 @@ namespace Labyrinth_Fights
         {
             string file = "..\\..\\mazeJoute.txt";
             Labyrinthe maze = new Labyrinthe();
-            List<string> liststring = maze.ReadFile(file);
-            char[,] matchar = maze.ConvertListStringToMatChar(liststring);
+            char[,] matchar = TestInitialisation(maze, file);
             Cell[,] cells = maze.CharToCell(matchar);
             List<Position> positionsLibres = maze.PositionLibres(cells); 
             foreach(Position position in positionsLibres)
@@ -33,6 +37,62 @@ namespace Labyrinth_Fights
                 Console.WriteLine(position);
             }
         }
-       
+        public void TestSpawnCombatant()
+        {
+            string file = "..\\..\\mazeJoute.txt";
+            Labyrinthe maze = new Labyrinthe();
+            char[,] matchar = TestInitialisation(maze, file);
+            Cell[,] cells = maze.CharToCell(matchar);
+            List<Position> positionsLibres = maze.PositionLibres(cells);
+            foreach (Position pose in positionsLibres)
+            {
+                Console.Write(pose);
+            }
+            Console.WriteLine();
+
+            Random rand = new Random();
+            int index = rand.Next(positionsLibres.Count);
+            Position rdmPosFighter1 = positionsLibres[index];
+            //Console.WriteLine(rdmPosition);
+            FightersFactory factoryFighter = new FightersFactory();
+            Fighters fighterStore = new Fighters(factoryFighter);
+            Fighter fighter1 = fighterStore.AskForAFighter(rdmPosFighter1);
+            positionsLibres.Remove(fighter1.pos);
+            maze.Displaychar(matchar);
+        }
+
+        public void TestSpawnWeapon()
+        {
+            Labyrinthe maze = new Labyrinthe();
+            char[,] matchar = TestInitialisation(maze, "..\\..\\mazeGenerator.txt");
+            Cell[,] cells = maze.CharToCell(matchar);
+            List<Position> positionsLibres = maze.PositionLibres(cells);
+            maze.Displaychar(matchar);
+            Console.WriteLine();
+            Random rand = new Random();
+            int index = rand.Next(positionsLibres.Count);
+            maze.SpawnWeapon(matchar, index);
+            maze.Displaychar(matchar);
+        }
+
+        public void TestRépartionCombatant()
+        {
+            Labyrinthe maze = new Labyrinthe();
+            char[,] matchar = TestInitialisation(maze, "..\\..\\mazeGenerator.txt");
+            maze.Displaychar(matchar);
+            Console.WriteLine();
+            maze.RépartitionCombatants(matchar);
+            maze.Displaychar(matchar);
+        }
+
+        public void TestRépartionWeapon()
+        {
+            Labyrinthe maze = new Labyrinthe();
+            char[,] matchar = TestInitialisation(maze, "..\\..\\mazeGenerator.txt");
+            maze.Displaychar(matchar);
+            Console.WriteLine();
+            maze.RépartitionWeapon(matchar);
+            maze.Displaychar(matchar);
+        }
     }
 }

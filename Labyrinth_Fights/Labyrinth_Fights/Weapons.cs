@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Labyrinth_Fights
 {
+    
+
     public class Weapons
     {
+        Random rand = new Random();
+        int index;
         WeaponsFactory factory;
         Dictionary<int, string> catalogueArmes = new Dictionary<int, string>();
         List<Weapon> ListWeapons = new List<Weapon>();
@@ -29,8 +33,7 @@ namespace Labyrinth_Fights
         public Weapon AskForWeapon(Position position)
         {
             Weapon weapon = null;
-            Random rand = new Random();
-            string type = catalogueArmes[rand.Next(4)];
+            string type = catalogueArmes[index];
             weapon = factory.CreateWeapon(type,position);
             ListWeapons.Add(weapon);
             return weapon;

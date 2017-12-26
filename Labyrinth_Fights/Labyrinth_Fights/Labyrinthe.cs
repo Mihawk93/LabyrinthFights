@@ -10,10 +10,6 @@ namespace Labyrinth_Fights
 
     class Labyrinthe
     {
-        //attributs
-
-            
-        static int[,] map;
 
 
         public Labyrinthe()
@@ -234,7 +230,89 @@ namespace Labyrinth_Fights
             }
         }
 
+        public char[,] SpawnCombatant(char[,] mat, int index)
+        {
+            char[,] matchar = mat;
+            Cell[,] cells = CharToCell(matchar);
+            List<Position> positionsLibres = PositionLibres(cells);
+            Position rdmPosFighter1 = positionsLibres[index];
+            FightersFactory factoryFighter = new FightersFactory();
+            Fighters fighterStore = new Fighters(factoryFighter);
+            Fighter fighter = fighterStore.AskForAFighter(rdmPosFighter1);
+            positionsLibres.Remove(fighter.pos);
+            matchar[rdmPosFighter1.coord_X, rdmPosFighter1.coord_Y] = 'X';
+            return matchar;
+        }
 
+        public char[,] SpawnWeapon(char[,] mat, int index)
+        {
+            char[,] matchar = mat;
+            Cell[,] cells = CharToCell(matchar);
+            List<Position> positionsLibres = PositionLibres(cells);
+            Position rdmPosWeapon = positionsLibres[index];
+            WeaponsFactory factoryWeapon = new WeaponsFactory();
+            Weapons weaponStore = new Weapons(factoryWeapon);
+            Weapon weapon = weaponStore.AskForWeapon(rdmPosWeapon);
+            positionsLibres.Remove(weapon.pos);
+            if (weapon is Epee)
+            {
+                matchar[rdmPosWeapon.coord_X, rdmPosWeapon.coord_Y] = 'E';
 
+            }
+            if (weapon is Dague)
+            {
+                matchar[rdmPosWeapon.coord_X, rdmPosWeapon.coord_Y] = 'D';
+
+            }
+            if (weapon is Hache)
+            {
+                matchar[rdmPosWeapon.coord_X, rdmPosWeapon.coord_Y] = 'H';
+
+            }
+            if (weapon is Lance)
+            {
+                matchar[rdmPosWeapon.coord_X, rdmPosWeapon.coord_Y] = 'L';
+
+            }
+            return matchar;
+        }
+
+        public char[,] RépartitionCombatants(char[,] mat)
+        {
+            char[,] matchar = mat;
+            Cell[,] cells = CharToCell(matchar);
+            List<Position> positionsLibres = PositionLibres(cells);
+            double ratio = positionsLibres.Count * 0.01;
+            double numOfSpawn = Math.Round(ratio, 0);
+            Random rand = new Random();
+            int index;
+            for (int i=0; i<numOfSpawn;i++)
+            {
+                index = 0;
+                index = rand.Next(positionsLibres.Count);
+                SpawnCombatant(matchar, index);
+            }
+            return matchar;
+            
+        }
+
+        public char[,] RépartitionWeapon(char[,] mat)
+        {
+            char[,] matchar = mat;
+            Cell[,] cells = CharToCell(matchar);
+            List<Position> positionsLibres = PositionLibres(cells);
+            double ratio = positionsLibres.Count * 0.01;
+            double numOfSpawn = Math.Round(ratio, 0);
+            Random rand = new Random();
+            int index;
+            for (int i = 0; i < numOfSpawn; i++)
+            {
+                index = 0;
+                index = rand.Next(positionsLibres.Count);
+                SpawnWeapon(matchar, index);
+            }
+            return matchar;
+
+        }
     }
 }
