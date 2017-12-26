@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Labyrinth_Fights
 {
-    class Fighter
+    public class Fighter
     {
         int id;
         int dégats;
@@ -16,7 +16,13 @@ namespace Labyrinth_Fights
         List<Weapon> weapons;
         bool offensif;
 
+        public List<Position> Visitees = new List<Position>();
+        public Stack<Position> Chemin = new Stack<Position>();
 
+        public bool nordVisite = false;
+        public bool sudVisite = false;
+        public bool ouestVisite = false;
+        public bool estVisite = false;
 
         public Fighter (Position pos)
         {
@@ -25,6 +31,30 @@ namespace Labyrinth_Fights
             this.hp = 100;
             this.weapons = new List<Weapon>();
             this.offensif = false;
+        }
+
+        public Position Nord()
+        {
+            Position nord = new Position(pos.coord_X - 1, this.pos.coord_Y);
+            return nord;
+        }
+
+        public Position Sud()
+        {
+            Position sud = new Position(pos.coord_X + 1, this.pos.coord_Y);
+            return sud;
+        }
+
+        public Position Est()
+        {
+            Position est = new Position(pos.coord_X, this.pos.coord_Y+1);
+            return est;
+        }
+
+        public Position Ouest()
+        {
+            Position ouest = new Position(pos.coord_X, this.pos.coord_Y-1);
+            return ouest;
         }
 
 

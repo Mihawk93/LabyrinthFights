@@ -98,5 +98,37 @@ namespace Labyrinth_Fights
             maze.RepartitionWeapon(matchar, positionsLibres);
             maze.Displaychar(matchar);
         }
+
+        public void TestDeplacement()
+        {
+
+            Labyrinthe maze = new Labyrinthe();
+            char[,] matchar = TestInitialisation(maze, "..\\..\\mazeGenerator.txt");
+            Cell[,] cells = maze.CharToCell(matchar);
+            List<Position> positionsLibres = maze.PositionLibres(cells);
+            maze.Displaychar(matchar);
+            Console.WriteLine();
+            Random rand = new Random();
+            int index = rand.Next(positionsLibres.Count);
+            Position rdmPosFighter = positionsLibres[index];
+            maze.SpawnCombatant(matchar, positionsLibres, index);
+            FightersFactory factory = new FightersFactory();
+            Fighters fighterStore = new Fighters(factory);
+            Fighter fighter = fighterStore.AskForAFighter(rdmPosFighter);
+            matchar[rdmPosFighter.coord_X, rdmPosFighter.coord_Y] = 'X';
+            maze.Displaychar(matchar);
+            Console.WriteLine();
+
+            while (matchar[fighter.Nord().coord_X, fighter.Nord().coord_Y] != 2 && matchar[fighter.Sud().coord_X, fighter.Sud().coord_Y] != 2 && matchar[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != 2 && matchar[fighter.Est().coord_X, fighter.Est().coord_Y] != 2)
+            {
+                Console.WriteLine();
+                maze.Deplacement(matchar, fighter);
+                maze.Displaychar(matchar);
+                Console.ReadKey();
+            }
+            
+            
+        }
     }
+
 }

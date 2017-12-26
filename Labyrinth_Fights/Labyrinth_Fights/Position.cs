@@ -11,6 +11,7 @@ namespace Labyrinth_Fights
         public int coord_X;
         public int coord_Y;
 
+
         public Position(int X, int Y)
         {
             this.coord_X = X;

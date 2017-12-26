@@ -311,7 +311,84 @@ namespace Labyrinth_Fights
 
         }
 
-        
+        public char[,] Deplacement(char[,] mat, Fighter fighter)
+        {
+            fighter.Visitees.Add(fighter.pos);
+            fighter.Chemin.Push(fighter.pos);
+            List<Position> voisinsLibres = new List<Position>();
+            Console.Write("positions visitées: ");
+            foreach( Position pose in fighter.Visitees)
+            {
+                
+                if(pose==fighter.Nord())
+                {
+                    fighter.nordVisite = true;
+                }
+                else
+                {
+                    fighter.nordVisite = false;
+                    if (pose == fighter.Sud())
+                    {
+                        fighter.sudVisite = true;
+                    }
+                    else
+                    {
+                        fighter.sudVisite = false;
+                        if (pose == fighter.Ouest())
+                        {
+                            fighter.ouestVisite = true;
+                        }
+                        else
+                        {
+                            fighter.ouestVisite = false;
+                            if (pose == fighter.Est())
+                            {
+                                fighter.estVisite = true;
+                            }
+                            else
+                            {
+                                fighter.ouestVisite = false;
+                            }
+                        }
+                        
+                    }
+                    
+                }
+               
+                Console.Write(pose);
+            }
+            if(mat[fighter.Nord().coord_X,fighter.Nord().coord_Y] == '0' && fighter.nordVisite == false)
+            {
+                voisinsLibres.Add(fighter.Nord());
+            }
+            if (mat[fighter.Sud().coord_X, fighter.Sud().coord_Y] == '0' && fighter.sudVisite == false)
+            {
+                voisinsLibres.Add(fighter.Sud());
+            }
+            if (mat[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] == '0' && fighter.ouestVisite == false)
+            {
+                voisinsLibres.Add(fighter.Ouest());
+            }
+            if (mat[fighter.Est().coord_X, fighter.Est().coord_Y] == '0' && fighter.estVisite == false)
+            {
+                voisinsLibres.Add(fighter.Est());
+            }
+
+            Random rand = new Random();
+            int index = rand.Next(voisinsLibres.Count);
+            Console.WriteLine();
+            Console.Write("voisins libres: ");
+            foreach (Position pose in voisinsLibres)
+            {
+                
+                Console.Write(pose);
+            }
+            Console.WriteLine("random: " + index);
+            mat[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
+            fighter.pos = voisinsLibres[index];
+            mat[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
+            return mat;
+        }
 
     }
 }

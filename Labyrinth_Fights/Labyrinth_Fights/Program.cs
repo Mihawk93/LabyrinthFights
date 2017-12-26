@@ -11,7 +11,7 @@ namespace Labyrinth_Fights
         static void Main(string[] args)
         {
             //Initialisation
-            string file = "..\\..\\mazeGenerator.txt";
+            /*string file = "..\\..\\mazeGenerator.txt";
             Labyrinthe maze = new Labyrinthe();
             List<string> liststring = maze.ReadFile(file);
             char[,] matchar = maze.ConvertListStringToMatChar(liststring);
@@ -34,8 +34,12 @@ namespace Labyrinth_Fights
 
             maze.Displaychar(matchar);
             Console.WriteLine();
+            */
+
+            TestClass test = new TestClass();
+            test.TestDeplacement();
             
-            
+
             Console.ReadKey();
         }
 
