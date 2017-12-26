@@ -71,7 +71,7 @@ namespace Labyrinth_Fights
             Console.WriteLine();
             Random rand = new Random();
             int index = rand.Next(positionsLibres.Count);
-            maze.SpawnWeapon(matchar, index);
+            maze.SpawnWeapon(matchar,positionsLibres, index);
             maze.Displaychar(matchar);
         }
 
@@ -79,9 +79,11 @@ namespace Labyrinth_Fights
         {
             Labyrinthe maze = new Labyrinthe();
             char[,] matchar = TestInitialisation(maze, "..\\..\\mazeGenerator.txt");
+            Cell[,] cells = maze.CharToCell(matchar);
+            List<Position> positionsLibres = maze.PositionLibres(cells);
             maze.Displaychar(matchar);
             Console.WriteLine();
-            maze.RépartitionCombatants(matchar);
+            maze.RepartitionCombatants(matchar,positionsLibres);
             maze.Displaychar(matchar);
         }
 
@@ -89,9 +91,11 @@ namespace Labyrinth_Fights
         {
             Labyrinthe maze = new Labyrinthe();
             char[,] matchar = TestInitialisation(maze, "..\\..\\mazeGenerator.txt");
+            Cell[,] cells = maze.CharToCell(matchar);
+            List<Position> positionsLibres = maze.PositionLibres(cells);
             maze.Displaychar(matchar);
             Console.WriteLine();
-            maze.RépartitionWeapon(matchar);
+            maze.RepartitionWeapon(matchar, positionsLibres);
             maze.Displaychar(matchar);
         }
     }

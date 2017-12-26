@@ -16,6 +16,7 @@ namespace Labyrinth_Fights
             List<string> liststring = maze.ReadFile(file);
             char[,] matchar = maze.ConvertListStringToMatChar(liststring);
             Cell[,] cells = maze.CharToCell(matchar);
+            List<Position> positionsLibres = maze.PositionLibres(cells);
 
 
             //Affichage
@@ -24,12 +25,12 @@ namespace Labyrinth_Fights
 
 
             //Répartion Combatants
-            maze.RépartitionCombatants(matchar);
+            maze.RepartitionCombatants(matchar, positionsLibres);
             maze.Displaychar(matchar);
             Console.WriteLine();
 
             //Répartion Weapons
-            maze.RépartitionWeapon(matchar);
+            maze.RepartitionWeapon(matchar,positionsLibres);
 
             maze.Displaychar(matchar);
             Console.WriteLine();

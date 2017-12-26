@@ -17,6 +17,7 @@ namespace Labyrinth_Fights
         bool offensif;
 
 
+
         public Fighter (Position pos)
         {
             this.pos = pos;

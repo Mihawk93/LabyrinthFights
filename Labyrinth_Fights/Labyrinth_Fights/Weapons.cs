@@ -10,8 +10,7 @@ namespace Labyrinth_Fights
 
     public class Weapons
     {
-        Random rand = new Random();
-        int index;
+        
         WeaponsFactory factory;
         Dictionary<int, string> catalogueArmes = new Dictionary<int, string>();
         List<Weapon> ListWeapons = new List<Weapon>();
@@ -32,10 +31,19 @@ namespace Labyrinth_Fights
 
         public Weapon AskForWeapon(Position position)
         {
+            Random rand = new Random();
+            int index = 0;
+            for (int i=0; i<4;i++)
+            {
+                index = 0;
+                index = rand.Next(4);
+            }
+            
             Weapon weapon = null;
             string type = catalogueArmes[index];
             weapon = factory.CreateWeapon(type,position);
             ListWeapons.Add(weapon);
+            index = rand.Next(4);
             return weapon;
         }
     }

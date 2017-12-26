@@ -230,11 +230,10 @@ namespace Labyrinth_Fights
             }
         }
 
-        public char[,] SpawnCombatant(char[,] mat, int index)
+        public char[,] SpawnCombatant(char[,] mat,List<Position> positionsLibres, int index)
         {
             char[,] matchar = mat;
             Cell[,] cells = CharToCell(matchar);
-            List<Position> positionsLibres = PositionLibres(cells);
             Position rdmPosFighter1 = positionsLibres[index];
             FightersFactory factoryFighter = new FightersFactory();
             Fighters fighterStore = new Fighters(factoryFighter);
@@ -244,11 +243,10 @@ namespace Labyrinth_Fights
             return matchar;
         }
 
-        public char[,] SpawnWeapon(char[,] mat, int index)
+        public char[,] SpawnWeapon(char[,] mat, List<Position> positionsLibres, int index)
         {
             char[,] matchar = mat;
             Cell[,] cells = CharToCell(matchar);
-            List<Position> positionsLibres = PositionLibres(cells);
             Position rdmPosWeapon = positionsLibres[index];
             WeaponsFactory factoryWeapon = new WeaponsFactory();
             Weapons weaponStore = new Weapons(factoryWeapon);
@@ -277,11 +275,10 @@ namespace Labyrinth_Fights
             return matchar;
         }
 
-        public char[,] RépartitionCombatants(char[,] mat)
+        public char[,] RepartitionCombatants(char[,] mat, List<Position> positionsLibres)
         {
             char[,] matchar = mat;
             Cell[,] cells = CharToCell(matchar);
-            List<Position> positionsLibres = PositionLibres(cells);
             double ratio = positionsLibres.Count * 0.01;
             double numOfSpawn = Math.Round(ratio, 0);
             Random rand = new Random();
@@ -290,29 +287,31 @@ namespace Labyrinth_Fights
             {
                 index = 0;
                 index = rand.Next(positionsLibres.Count);
-                SpawnCombatant(matchar, index);
+                SpawnCombatant(matchar,positionsLibres, index);
             }
             return matchar;
             
         }
 
-        public char[,] RépartitionWeapon(char[,] mat)
+        public char[,] RepartitionWeapon(char[,] mat, List<Position> positionsLibres)
         {
             char[,] matchar = mat;
             Cell[,] cells = CharToCell(matchar);
-            List<Position> positionsLibres = PositionLibres(cells);
-            double ratio = positionsLibres.Count * 0.01;
+            double ratio = positionsLibres.Count * 0.1;
             double numOfSpawn = Math.Round(ratio, 0);
             Random rand = new Random();
-            int index;
+            int index = 0;
             for (int i = 0; i < numOfSpawn; i++)
             {
-                index = 0;
+                //index = 0;
                 index = rand.Next(positionsLibres.Count);
-                SpawnWeapon(matchar, index);
+                SpawnWeapon(matchar, positionsLibres, index);
             }
             return matchar;
 
         }
+
+        
+
     }
 }
