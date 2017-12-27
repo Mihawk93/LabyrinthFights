@@ -10,7 +10,7 @@ namespace Labyrinth_Fights
 
     class Labyrinthe
     {
-
+        
 
         public Labyrinthe()
         {
@@ -158,7 +158,7 @@ namespace Labyrinth_Fights
                     if (mat[i, j] == '1')
                     {
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("■");
+                        Console.Write("*");
                         Console.ResetColor();
                     }
 
@@ -275,19 +275,22 @@ namespace Labyrinth_Fights
             return matchar;
         }
 
-        public char[,] RepartitionCombatants(char[,] mat, List<Position> positionsLibres)
+        public char[,] RepartitionCombatants(char[,] mat, List<Position> positionsLibres, Fighters fighterStore)
         {
             char[,] matchar = mat;
             Cell[,] cells = CharToCell(matchar);
-            double ratio = positionsLibres.Count * 0.01;
-            double numOfSpawn = Math.Round(ratio, 0);
             Random rand = new Random();
             int index;
+            double ratio = positionsLibres.Count * 0.01;
+            double numOfSpawn = Math.Round(ratio, 0);
             for (int i=0; i<numOfSpawn;i++)
             {
                 index = 0;
                 index = rand.Next(positionsLibres.Count);
+                Position rdmPosFighter = positionsLibres[index];
                 SpawnCombatant(matchar,positionsLibres, index);
+                Fighter fighter = fighterStore.AskForAFighter(rdmPosFighter);
+                matchar[rdmPosFighter.coord_X, rdmPosFighter.coord_Y] = 'X';
             }
             return matchar;
             
@@ -339,7 +342,7 @@ namespace Labyrinth_Fights
                 {
                     fighter.estVisite = true;
                 }
-                Console.Write(pose);
+                //Console.Write(pose);
             }
             
             /*Console.Write(" et la pose du: ");
@@ -375,11 +378,11 @@ namespace Labyrinth_Fights
             int index = rand.Next(fighter.voisinsLibres.Count);
             //Console.WriteLine();
             //Console.Write("voisins libres: ");
-            foreach (Position pose in fighter.voisinsLibres)
+            /*foreach (Position pose in fighter.voisinsLibres)
             {
                 
                 Console.Write(pose);
-            }
+            }*/
             //Console.WriteLine("random: " + index);
             //Console.WriteLine();
             /*foreach(Position pose in fighter.Chemin)

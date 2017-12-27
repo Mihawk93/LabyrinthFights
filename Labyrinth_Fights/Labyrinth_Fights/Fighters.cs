@@ -9,7 +9,7 @@ namespace Labyrinth_Fights
     class Fighters
     {
         FightersFactory factory;
-        List<Fighter> fightersList;
+        public List<Fighter> fightersList;
 
         public Fighters(FightersFactory Factory)
         {
