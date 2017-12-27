@@ -103,7 +103,7 @@ namespace Labyrinth_Fights
         {
 
             Labyrinthe maze = new Labyrinthe();
-            char[,] matchar = TestInitialisation(maze, "..\\..\\mazeGenerator.txt");
+            char[,] matchar = TestInitialisation(maze, "..\\..\\mazeJoute.txt");
             Cell[,] cells = maze.CharToCell(matchar);
             List<Position> positionsLibres = maze.PositionLibres(cells);
             maze.Displaychar(matchar);
@@ -119,15 +119,35 @@ namespace Labyrinth_Fights
             maze.Displaychar(matchar);
             Console.WriteLine();
 
-            while (matchar[fighter.Nord().coord_X, fighter.Nord().coord_Y] != 2 && matchar[fighter.Sud().coord_X, fighter.Sud().coord_Y] != 2 && matchar[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != 2 && matchar[fighter.Est().coord_X, fighter.Est().coord_Y] != 2)
+            while (matchar[fighter.Nord().coord_X, fighter.Nord().coord_Y] != '2' && matchar[fighter.Sud().coord_X, fighter.Sud().coord_Y] != '2' && matchar[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != '2' && matchar[fighter.Est().coord_X, fighter.Est().coord_Y] != '2')
             {
                 matchar= maze.Deplacement(matchar, fighter);
                 Console.Clear();
                 maze.Displaychar(matchar);
                 Console.ReadKey();
             }
-            
-            
+            if (matchar[fighter.Est().coord_X, fighter.Est().coord_Y] == '2')
+            {
+                matchar[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
+                fighter.pos = fighter.Est();
+                matchar[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
+                maze.Displaychar(matchar);
+                Console.Read();
+                Console.Clear();
+                Console.Write("End of the game");
+            }
+            if (matchar[fighter.Sud().coord_X, fighter.Sud().coord_Y] == '2')
+            {
+                matchar[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
+                fighter.pos = fighter.Sud();
+                matchar[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
+                Console.Clear();
+                maze.Displaychar(matchar);
+                Console.ReadKey();
+                Console.Clear();
+                Console.Write("End of the game");
+            }
+
         }
     }
 

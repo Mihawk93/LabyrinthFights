@@ -341,8 +341,8 @@ namespace Labyrinth_Fights
                 }
                 Console.Write(pose);
             }
-            /*
-            Console.Write(" et la pose du: ");
+            
+            /*Console.Write(" et la pose du: ");
             Console.WriteLine();
             Console.WriteLine("nord: " + fighter.Nord());
             Console.WriteLine("sud: " + fighter.Sud());
@@ -373,14 +373,19 @@ namespace Labyrinth_Fights
 
             Random rand = new Random();
             int index = rand.Next(fighter.voisinsLibres.Count);
-           /* Console.WriteLine();
-            Console.Write("voisins libres: ");*/
+            //Console.WriteLine();
+            //Console.Write("voisins libres: ");
             foreach (Position pose in fighter.voisinsLibres)
             {
                 
                 Console.Write(pose);
             }
             //Console.WriteLine("random: " + index);
+            //Console.WriteLine();
+            /*foreach(Position pose in fighter.Chemin)
+            {
+                Console.Write(pose);
+            }*/
             fighter.estVisite = false;
             fighter.nordVisite = false;
             fighter.sudVisite = false;
@@ -393,8 +398,8 @@ namespace Labyrinth_Fights
             }
             else
             {
-                char[,] matchar = RetourSurChemin(mat, fighter);
-                Displaychar(mat);
+                mat = RetourSurChemin(mat, fighter);
+                //Console.WriteLine("test");
             }
             
             return mat;
@@ -403,9 +408,11 @@ namespace Labyrinth_Fights
         public char[,] RetourSurChemin (char[,] mat, Fighter fighter)
         {
             mat[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
+            fighter.Chemin.Pop();
+            fighter.Chemin.Pop();
             fighter.pos = fighter.Chemin.Peek();
             mat[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
-            fighter.Chemin.Pop();
+            
             
             return mat;
         }
