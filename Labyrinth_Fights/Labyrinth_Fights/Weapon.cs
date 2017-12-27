@@ -15,5 +15,10 @@ namespace Labyrinth_Fights
         {
             this.pos = theposition;
         }
+        public Weapon()
+        {
+            this.pos = new Position(0, 0);
+        }
+
     }
 }

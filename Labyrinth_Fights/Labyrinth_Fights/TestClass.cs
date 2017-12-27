@@ -95,9 +95,11 @@ namespace Labyrinth_Fights
             char[,] matchar = TestInitialisation(maze, "..\\..\\mazeGenerator.txt");
             Cell[,] cells = maze.CharToCell(matchar);
             List<Position> positionsLibres = maze.PositionLibres(cells);
+            WeaponsFactory factory = new WeaponsFactory();
+            Weapons weaponsStore = new Weapons(factory);
             maze.Displaychar(matchar);
             Console.WriteLine();
-            maze.RepartitionWeapon(matchar, positionsLibres);
+            maze.RepartitionWeapon(matchar, positionsLibres,weaponsStore);
             maze.Displaychar(matchar);
         }
 
@@ -161,7 +163,66 @@ namespace Labyrinth_Fights
                 Console.Clear();
                 Console.Write("End of the game");
             }
+        }
 
+        public void TestRamasserWeapon()
+        {
+            Labyrinthe maze = new Labyrinthe();
+            char[,] matchar = TestInitialisation(maze, "..\\..\\mazeJoute.txt");
+            Cell[,] cells = maze.CharToCell(matchar);
+
+            FightersFactory factory = new FightersFactory();
+            Fighters fighterStore = new Fighters(factory);
+            List<Position> positionsLibres = maze.PositionLibres(cells);
+            Random rand = new Random();
+            int index = rand.Next(positionsLibres.Count);
+            maze.SpawnCombatant(matchar, positionsLibres, index);
+            Position rdmPosFighter = positionsLibres[index];
+            Fighter fighter = fighterStore.AskForAFighter(rdmPosFighter);
+            positionsLibres.Remove(fighter.pos);
+            maze.Displaychar(matchar);
+
+            WeaponsFactory factory2 = new WeaponsFactory();
+            Weapons weaponStore = new Weapons(factory2);
+            Random rand2 = new Random();
+            int index2 = rand2.Next(positionsLibres.Count);
+            maze.SpawnWeapon(matchar, positionsLibres, index2);
+            Position rdmPosWeapon = positionsLibres[index2];
+            Weapon weapon = weaponStore.AskForWeapon(rdmPosWeapon);
+            positionsLibres.Remove(weapon.pos);
+            maze.Displaychar(matchar);
+
+            while (matchar[fighter.Sud().coord_X, fighter.Sud().coord_Y] != '2')
+            {
+                Weapon weap = maze.ChercheWeapon(weaponStore.ListWeapons, fighter.pos);
+                if (weap.pos.coord_X!=0 && weap.pos.coord_Y!=0)
+                {
+                    fighter.weapons.Add(weap);
+                }
+                
+                matchar = maze.Deplacement(matchar, fighter);
+                Console.Clear();
+                maze.Displaychar(matchar);
+                Console.ReadKey();
+            }
+            if (matchar[fighter.Sud().coord_X, fighter.Sud().coord_Y] == '2')
+            {
+                matchar[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
+                fighter.pos = fighter.Sud();
+                matchar[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
+                Console.Clear();
+                maze.Displaychar(matchar);
+                Console.ReadKey();
+                Console.Clear();
+                Console.Write("Arme du fighter: ");
+                foreach (Weapon weap in fighter.weapons)
+                {
+                    Console.Write("test");
+                    Console.WriteLine(weap);
+                }
+                
+                Console.Write("End of the game");
+            }
 
         }
     }

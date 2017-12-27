@@ -37,7 +37,7 @@ namespace Labyrinth_Fights
             */
 
             TestClass test = new TestClass();
-            test.TestDeplacement();
+            test.TestRamasserWeapon();
             
 
             Console.ReadKey();

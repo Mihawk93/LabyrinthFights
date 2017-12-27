@@ -13,7 +13,7 @@ namespace Labyrinth_Fights
         int hp;
 
         public Position pos;
-        List<Weapon> weapons;
+        public List<Weapon> weapons = new List<Weapon>();
         bool offensif;
 
         public List<Position> voisinsLibres = new List<Position>();

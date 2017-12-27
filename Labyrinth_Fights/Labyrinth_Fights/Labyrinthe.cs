@@ -239,7 +239,6 @@ namespace Labyrinth_Fights
             Fighters fighterStore = new Fighters(factoryFighter);
             Fighter fighter = fighterStore.AskForAFighter(rdmPosFighter1);
             positionsLibres.Remove(fighter.pos);
-            matchar[rdmPosFighter1.coord_X, rdmPosFighter1.coord_Y] = 'X';
             return matchar;
         }
 
@@ -296,7 +295,7 @@ namespace Labyrinth_Fights
             
         }
 
-        public char[,] RepartitionWeapon(char[,] mat, List<Position> positionsLibres)
+        public char[,] RepartitionWeapon(char[,] mat, List<Position> positionsLibres, Weapons weaponsStore)
         {
             char[,] matchar = mat;
             Cell[,] cells = CharToCell(matchar);
@@ -357,19 +356,19 @@ namespace Labyrinth_Fights
             Console.WriteLine("ouest: " + fighter.ouestVisite);
             Console.WriteLine("est: " + fighter.estVisite);*/
 
-            if (mat[fighter.Nord().coord_X,fighter.Nord().coord_Y] == '0' && fighter.nordVisite == false)
+            if (mat[fighter.Nord().coord_X,fighter.Nord().coord_Y] != '1' && mat[fighter.Nord().coord_X, fighter.Nord().coord_Y] != 'X' && fighter.nordVisite == false)
             {
                 fighter.voisinsLibres.Add(fighter.Nord());
             }
-            if (mat[fighter.Sud().coord_X, fighter.Sud().coord_Y] == '0' && fighter.sudVisite == false)
+            if (mat[fighter.Sud().coord_X, fighter.Sud().coord_Y] != '1' && mat[fighter.Sud().coord_X, fighter.Sud().coord_Y] != 'X' && fighter.sudVisite == false)
             {
                 fighter.voisinsLibres.Add(fighter.Sud());
             }
-            if (mat[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] == '0' && fighter.ouestVisite == false)
+            if (mat[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != '1' && mat[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != 'X' && fighter.ouestVisite == false)
             {
                 fighter.voisinsLibres.Add(fighter.Ouest());
             }
-            if (mat[fighter.Est().coord_X, fighter.Est().coord_Y] == '0' && fighter.estVisite == false)
+            if (mat[fighter.Est().coord_X, fighter.Est().coord_Y] != '1' && mat[fighter.Est().coord_X, fighter.Est().coord_Y] != 'X' &&  fighter.estVisite == false)
             {
                 fighter.voisinsLibres.Add(fighter.Est());
             }
@@ -418,6 +417,20 @@ namespace Labyrinth_Fights
             
             
             return mat;
+        }
+
+        public Weapon ChercheWeapon(List<Weapon> weapons, Position position)
+        {
+            Weapon newWeapon = new Weapon();
+            
+            for(int i=0; i<weapons.Count();i++)
+            {
+                if(weapons[i].pos==position)
+                {
+                    newWeapon = weapons[i];
+                }
+            }
+            return newWeapon;
         }
     }
 }

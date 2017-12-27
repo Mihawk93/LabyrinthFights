@@ -13,7 +13,7 @@ namespace Labyrinth_Fights
         
         WeaponsFactory factory;
         Dictionary<int, string> catalogueArmes = new Dictionary<int, string>();
-        List<Weapon> ListWeapons = new List<Weapon>();
+        public List<Weapon> ListWeapons = new List<Weapon>();
 
         public void InitDictionary()
         {
