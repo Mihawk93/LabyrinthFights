@@ -313,10 +313,10 @@ namespace Labyrinth_Fights
 
         public char[,] Deplacement(char[,] mat, Fighter fighter)
         {
+            fighter.voisinsLibres = new List<Position>() ;
             fighter.Visitees.Add(fighter.pos);
             fighter.Chemin.Push(fighter.pos);
-            List<Position> voisinsLibres = new List<Position>();
-            Console.Write("positions visitées: ");
+            //Console.Write("positions visitées: ");
             foreach( Position pose in fighter.Visitees)
             {
                 
@@ -341,7 +341,7 @@ namespace Labyrinth_Fights
                 }
                 Console.Write(pose);
             }
-            
+            /*
             Console.Write(" et la pose du: ");
             Console.WriteLine();
             Console.WriteLine("nord: " + fighter.Nord());
@@ -352,44 +352,62 @@ namespace Labyrinth_Fights
             Console.WriteLine("nord: " + fighter.nordVisite);
             Console.WriteLine("sud: " + fighter.sudVisite);
             Console.WriteLine("ouest: " + fighter.ouestVisite);
-            Console.WriteLine("est: " + fighter.estVisite);
+            Console.WriteLine("est: " + fighter.estVisite);*/
 
             if (mat[fighter.Nord().coord_X,fighter.Nord().coord_Y] == '0' && fighter.nordVisite == false)
             {
-                voisinsLibres.Add(fighter.Nord());
+                fighter.voisinsLibres.Add(fighter.Nord());
             }
             if (mat[fighter.Sud().coord_X, fighter.Sud().coord_Y] == '0' && fighter.sudVisite == false)
             {
-                voisinsLibres.Add(fighter.Sud());
+                fighter.voisinsLibres.Add(fighter.Sud());
             }
             if (mat[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] == '0' && fighter.ouestVisite == false)
             {
-                voisinsLibres.Add(fighter.Ouest());
+                fighter.voisinsLibres.Add(fighter.Ouest());
             }
             if (mat[fighter.Est().coord_X, fighter.Est().coord_Y] == '0' && fighter.estVisite == false)
             {
-                voisinsLibres.Add(fighter.Est());
+                fighter.voisinsLibres.Add(fighter.Est());
             }
 
             Random rand = new Random();
-            int index = rand.Next(voisinsLibres.Count);
-            Console.WriteLine();
-            Console.Write("voisins libres: ");
-            foreach (Position pose in voisinsLibres)
+            int index = rand.Next(fighter.voisinsLibres.Count);
+           /* Console.WriteLine();
+            Console.Write("voisins libres: ");*/
+            foreach (Position pose in fighter.voisinsLibres)
             {
                 
                 Console.Write(pose);
             }
-            Console.WriteLine("random: " + index);
+            //Console.WriteLine("random: " + index);
             fighter.estVisite = false;
             fighter.nordVisite = false;
             fighter.sudVisite = false;
             fighter.ouestVisite = false;
-            mat[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
-            fighter.pos = voisinsLibres[index];
-            mat[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
+            if(fighter.voisinsLibres.Count() != 0)
+            {
+                mat[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
+                fighter.pos = fighter.voisinsLibres[index];
+                mat[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
+            }
+            else
+            {
+                char[,] matchar = RetourSurChemin(mat, fighter);
+                Displaychar(mat);
+            }
+            
             return mat;
         }
 
+        public char[,] RetourSurChemin (char[,] mat, Fighter fighter)
+        {
+            mat[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
+            fighter.pos = fighter.Chemin.Peek();
+            mat[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
+            fighter.Chemin.Pop();
+            
+            return mat;
+        }
     }
 }

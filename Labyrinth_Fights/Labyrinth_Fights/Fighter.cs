@@ -16,6 +16,7 @@ namespace Labyrinth_Fights
         List<Weapon> weapons;
         bool offensif;
 
+        public List<Position> voisinsLibres = new List<Position>();
         public List<Position> Visitees = new List<Position>();
         public Stack<Position> Chemin = new Stack<Position>();
 

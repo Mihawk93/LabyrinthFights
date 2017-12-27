@@ -121,8 +121,7 @@ namespace Labyrinth_Fights
 
             while (matchar[fighter.Nord().coord_X, fighter.Nord().coord_Y] != 2 && matchar[fighter.Sud().coord_X, fighter.Sud().coord_Y] != 2 && matchar[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != 2 && matchar[fighter.Est().coord_X, fighter.Est().coord_Y] != 2)
             {
-                Console.WriteLine();
-                maze.Deplacement(matchar, fighter);
+                matchar= maze.Deplacement(matchar, fighter);
                 Console.Clear();
                 maze.Displaychar(matchar);
                 Console.ReadKey();
