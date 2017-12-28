@@ -168,7 +168,7 @@ namespace Labyrinth_Fights
         public void TestRamasserWeapon()
         {
             Labyrinthe maze = new Labyrinthe();
-            char[,] matchar = TestInitialisation(maze, "..\\..\\mazeJoute.txt");
+            char[,] matchar = TestInitialisation(maze, "..\\..\\theMaze.txt");
             Cell[,] cells = maze.CharToCell(matchar);
 
             FightersFactory factory = new FightersFactory();
@@ -187,40 +187,49 @@ namespace Labyrinth_Fights
             Random rand2 = new Random();
             int index2 = rand2.Next(positionsLibres.Count);
             maze.SpawnWeapon(matchar, positionsLibres, index2);
-            Position rdmPosWeapon = positionsLibres[index2];
+            Position rdmPosWeapon = positionsLibres[index2-1];
             Weapon weapon = weaponStore.AskForWeapon(rdmPosWeapon);
             positionsLibres.Remove(weapon.pos);
             maze.Displaychar(matchar);
+            Console.WriteLine("Position du fighter" + fighter.pos);
+            Console.WriteLine("Nombre de fighter" + fighterStore.fightersList.Count());
 
             while (matchar[fighter.Sud().coord_X, fighter.Sud().coord_Y] != '2')
             {
-                Weapon weap = maze.ChercheWeapon(weaponStore.ListWeapons, fighter.pos);
+                
+                Weapon weap = maze.ChercheWeapon(weaponStore.ListWeapons, fighter);
+                
                 if (weap.pos.coord_X!=0 && weap.pos.coord_Y!=0)
                 {
                     fighter.weapons.Add(weap);
+                    weap.pos.coord_X = 0;
+                    weap.pos.coord_Y = 0;
                 }
-                
                 matchar = maze.Deplacement(matchar, fighter);
-                Console.Clear();
+                Console.WriteLine("Nombre de fighter" + fighterStore.fightersList.Count());
                 maze.Displaychar(matchar);
-                Console.ReadKey();
+                Console.Clear();
+
+                Console.WriteLine("Position du fighter" + fighter.pos);
+                Console.WriteLine("rdmposweapon:" +rdmPosWeapon);
+                Console.WriteLine(weap.pos);
             }
             if (matchar[fighter.Sud().coord_X, fighter.Sud().coord_Y] == '2')
             {
+                maze.Displaychar(matchar);
                 matchar[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
                 fighter.pos = fighter.Sud();
                 matchar[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
+                Console.ReadKey();
                 Console.Clear();
                 maze.Displaychar(matchar);
                 Console.ReadKey();
                 Console.Clear();
+                Console.WriteLine();
                 Console.Write("Arme du fighter: ");
-                foreach (Weapon weap in fighter.weapons)
-                {
-                    Console.Write("test");
-                    Console.WriteLine(weap);
-                }
-                
+                Console.WriteLine(fighter.weapons.Count());
+                Console.Write("Arme dans la liste: ");
+                Console.WriteLine(weaponStore.ListWeapons.Count());
                 Console.Write("End of the game");
             }
 
