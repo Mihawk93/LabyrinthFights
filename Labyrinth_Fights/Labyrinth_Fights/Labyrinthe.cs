@@ -238,7 +238,6 @@ namespace Labyrinth_Fights
             FightersFactory factoryFighter = new FightersFactory();
             Fighters fighterStore = new Fighters(factoryFighter);
             Fighter fighter = fighterStore.AskForAFighter(rdmPosFighter);
-            matchar[rdmPosFighter.coord_X, rdmPosFighter.coord_Y] = 'X';
             positionsLibres.Remove(fighter.pos);
             return matchar;
         }
@@ -300,7 +299,7 @@ namespace Labyrinth_Fights
         {
             char[,] matchar = mat;
             Cell[,] cells = CharToCell(matchar);
-            double ratio = positionsLibres.Count * 0.1;
+            double ratio = positionsLibres.Count * 0.01;
             double numOfSpawn = Math.Round(ratio, 0);
             Random rand = new Random();
             int index = 0;
@@ -308,7 +307,9 @@ namespace Labyrinth_Fights
             {
                 //index = 0;
                 index = rand.Next(positionsLibres.Count);
+                Position rdmPosWeapon = positionsLibres[index];
                 SpawnWeapon(matchar, positionsLibres, index);
+                Weapon weapon = weaponsStore.AskForWeapon(rdmPosWeapon);
             }
             return matchar;
 
@@ -398,8 +399,6 @@ namespace Labyrinth_Fights
             {
                 mat[fighter.pos.coord_X, fighter.pos.coord_Y] = '0';
                 fighter.pos = fighter.voisinsLibres[index];
-                Console.WriteLine(index);
-                Console.WriteLine(fighter.voisinsLibres[index]);
                 mat[fighter.pos.coord_X, fighter.pos.coord_Y] = 'X';
             }
             else
