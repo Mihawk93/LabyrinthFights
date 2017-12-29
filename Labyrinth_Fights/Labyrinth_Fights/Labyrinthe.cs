@@ -10,7 +10,7 @@ namespace Labyrinth_Fights
 
     class Labyrinthe
     {
-        
+        public List<Fighter> fighterList = new List<Fighter>();
 
         public Labyrinthe()
         {
@@ -175,24 +175,111 @@ namespace Labyrinth_Fights
                     }
                     if (mat[i, j] == 'E')
                     {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write("E");
+                        Console.ResetColor();
                     }
 
                     if (mat[i, j] == 'X')
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write("X");
+                        Console.ResetColor();
                     }
+
+                    /*if((mat[i, j] == 'X' && i == fighterList[0].pos.coord_X && j == fighterList[0].pos.coord_Y && i == fighterList[1].pos.coord_X && j == fighterList[1].pos.coord_Y) || (mat[i, j] == 'X' && i == fighterList[0].pos.coord_X && j == fighterList[0].pos.coord_Y && i == fighterList[2].pos.coord_X && j == fighterList[2].pos.coord_Y) || (mat[i, j] == 'X' && i == fighterList[2].pos.coord_X && j == fighterList[2].pos.coord_Y && i == fighterList[1].pos.coord_X && j == fighterList[1].pos.coord_Y))
+                    {
+                        if (mat[i, j] == 'X' && i == fighterList[0].pos.coord_X && j == fighterList[0].pos.coord_Y && i == fighterList[1].pos.coord_X && j == fighterList[1].pos.coord_Y)
+                        {
+
+                            if (mat[i, j] == 'X' && i == fighterList[0].pos.coord_X && j == fighterList[0].pos.coord_Y)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("X");
+                                Console.ResetColor();
+                            }
+                            if (mat[i, j] == 'X' && i == fighterList[2].pos.coord_X && j == fighterList[2].pos.coord_Y)
+                            {
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("X");
+                                Console.ResetColor();
+                            }
+                        }
+
+                        if (mat[i, j] == 'X' && i == fighterList[2].pos.coord_X && j == fighterList[2].pos.coord_Y && i == fighterList[1].pos.coord_X && j == fighterList[1].pos.coord_Y)
+                        {
+                            if (mat[i, j] == 'X' && i == fighterList[2].pos.coord_X && j == fighterList[2].pos.coord_Y)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("X");
+                                Console.ResetColor();
+                            }
+
+                            if (mat[i, j] == 'X' && i == fighterList[0].pos.coord_X && j == fighterList[0].pos.coord_Y)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.Write("X");
+                                Console.ResetColor();
+                            }
+                        }
+
+                        if(mat[i, j] == 'X' && i == fighterList[2].pos.coord_X && j == fighterList[2].pos.coord_Y && i == fighterList[0].pos.coord_X && j == fighterList[0].pos.coord_Y)
+                        {
+                            if (mat[i, j] == 'X' && i == fighterList[0].pos.coord_X && j == fighterList[0].pos.coord_Y)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("X");
+                                Console.ResetColor();
+                            }
+                            if (mat[i, j] == 'X' && i == fighterList[1].pos.coord_X && j == fighterList[1].pos.coord_Y)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write("X");
+                                Console.ResetColor();
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        if (mat[i, j] == 'X' && i == fighterList[0].pos.coord_X && j == fighterList[0].pos.coord_Y)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write("X");
+                            Console.ResetColor();
+                        }
+                        if (mat[i, j] == 'X' && i == fighterList[1].pos.coord_X && j == fighterList[1].pos.coord_Y)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("X");
+                            Console.ResetColor();
+                        }
+                        if (mat[i, j] == 'X' && i == fighterList[2].pos.coord_X && j == fighterList[2].pos.coord_Y)
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write("X");
+                            Console.ResetColor();
+                        }
+
+                    
+                    }*/
                     if (mat[i, j] == 'H')
                     {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write("H");
+                        Console.ResetColor();
                     }
                     if (mat[i, j] == 'D')
                     {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write("D");
+                        Console.ResetColor();
                     }
                     if (mat[i, j] == 'L')
                     {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write("L");
+                        Console.ResetColor();
                     }
                 }
                 Console.WriteLine();
@@ -299,7 +386,7 @@ namespace Labyrinth_Fights
         {
             char[,] matchar = mat;
             Cell[,] cells = CharToCell(matchar);
-            double ratio = positionsLibres.Count * 0.01;
+            double ratio = positionsLibres.Count * 0.03;
             double numOfSpawn = Math.Round(ratio, 0);
             Random rand = new Random();
             int index = 0;
@@ -359,19 +446,19 @@ namespace Labyrinth_Fights
             Console.WriteLine("ouest: " + fighter.ouestVisite);
             Console.WriteLine("est: " + fighter.estVisite);*/
 
-            if (mat[fighter.Nord().coord_X,fighter.Nord().coord_Y] != '1' && mat[fighter.Nord().coord_X, fighter.Nord().coord_Y] != 'X' && fighter.nordVisite == false)
+            if (mat[fighter.Nord().coord_X,fighter.Nord().coord_Y] != '1' /*&& mat[fighter.Nord().coord_X, fighter.Nord().coord_Y] != 'X'*/ && fighter.nordVisite == false)
             {
                 fighter.voisinsLibres.Add(fighter.Nord());
             }
-            if (mat[fighter.Sud().coord_X, fighter.Sud().coord_Y] != '1' && mat[fighter.Sud().coord_X, fighter.Sud().coord_Y] != 'X' && fighter.sudVisite == false)
+            if (mat[fighter.Sud().coord_X, fighter.Sud().coord_Y] != '1' /*&& mat[fighter.Sud().coord_X, fighter.Sud().coord_Y] != 'X'*/ && fighter.sudVisite == false)
             {
                 fighter.voisinsLibres.Add(fighter.Sud());
             }
-            if (mat[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != '1' && mat[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != 'X' && fighter.ouestVisite == false)
+            if (mat[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != '1' /*&& mat[fighter.Ouest().coord_X, fighter.Ouest().coord_Y] != 'X'*/ && fighter.ouestVisite == false)
             {
                 fighter.voisinsLibres.Add(fighter.Ouest());
             }
-            if (mat[fighter.Est().coord_X, fighter.Est().coord_Y] != '1'  && mat[fighter.Est().coord_X, fighter.Est().coord_Y] != 'X' && mat[fighter.Est().coord_X, fighter.Est().coord_Y] != '2' &&  fighter.estVisite == false)
+            if (mat[fighter.Est().coord_X, fighter.Est().coord_Y] != '1'  /*&& mat[fighter.Est().coord_X, fighter.Est().coord_Y] != 'X'*/ && mat[fighter.Est().coord_X, fighter.Est().coord_Y] != '2' &&  fighter.estVisite == false)
             {
                 fighter.voisinsLibres.Add(fighter.Est());
             }
@@ -434,6 +521,11 @@ namespace Labyrinth_Fights
                 }
             }
             return newWeapon;
+        }
+
+        public void Combat(char[,] matchar, Fighter fighter1, Fighter fighter2)
+        {
+            fighter2.Hp = fighter2.Hp - fighter1.Dégats;
         }
     }
 }

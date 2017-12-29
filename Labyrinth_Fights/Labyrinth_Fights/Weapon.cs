@@ -8,7 +8,7 @@ namespace Labyrinth_Fights
 {
     public class Weapon
     {
-        protected int dégats;
+        public int dégats;
         public Position pos;
 
         public Weapon(Position theposition)
